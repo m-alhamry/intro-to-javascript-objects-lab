@@ -377,13 +377,48 @@ game.catchPokemon = function(pokemonName) {
     }
 }
 
-game.catchPokemon('Paras');
-game.catchPokemon('Parasect');
-game.catchPokemon('Diglett');
-game.catchPokemon('Meowth');
-game.catchPokemon('Primeape');
-game.catchPokemon('Psyduck');
-game.catchPokemon('Mankey');
-console.log(game.party);
-console.log(game.collection);
-console.log(game.items[1].quantity);
+// game.catchPokemon('Paras');
+// game.catchPokemon('Parasect');
+// game.catchPokemon('Diglett');
+// game.catchPokemon('Meowth');
+// game.catchPokemon('Primeape');
+// game.catchPokemon('Psyduck');
+// game.catchPokemon('Mankey');
+// console.log(game.party);
+// console.log(game.collection);
+// console.log(game.items[1].quantity);
+
+/*
+Exercise 21
+Dynamically construct an object with the existing `pokemon` data sorted by the different pokemon types. The object will have this structure:
+
+{
+  grass: [
+    { number: 1, name: 'Bulbasaur', type: 'grass', hp: 45, starter: true },
+    { number: 2, name: 'Ivysaur', type: 'grass', hp: 60, starter: false },
+    { number: 3, name: 'Venusaur', type: 'grass', hp: 80, starter: false },
+    * more grass type Pokemon objects...
+  ],
+  fire: [
+    { number: 4, name: 'Charmander', type: 'fire', hp: 39, starter: true },
+    * more fire type Pokemon objects...
+  ],
+  water: [
+    * water type Pokemon objects...
+  ],
+  * etc... until there is an array for every Pokemon type!
+}
+
+Log the object when it's constructed.
+
+Solve Exercise 21 here:
+*/
+
+const pokemonsByType = {};
+
+pokemon.forEach((p) => {
+    if(!pokemonsByType[p.type]) pokemonsByType[p.type] = [];
+    pokemonsByType[p.type].push(p);
+});
+
+console.log(pokemonsByType);
