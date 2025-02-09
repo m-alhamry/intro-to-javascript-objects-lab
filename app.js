@@ -327,13 +327,63 @@ game.catchPokemon = function(pokemonObj) {
         console.log("There are not enough pokeballs to catch the desired Pokemon.");
     }
 }
-game.catchPokemon(pokemon[32]);
-game.catchPokemon(pokemon[33]);
-game.catchPokemon(pokemon[34]);
-game.catchPokemon(pokemon[35]);
-game.catchPokemon(pokemon[36]);
-game.catchPokemon(pokemon[37]);
-game.catchPokemon(pokemon[38]);
-console.log(game.party.length);
-console.log(game.collection.length);
+// game.catchPokemon(pokemon[32]);
+// game.catchPokemon(pokemon[33]);
+// game.catchPokemon(pokemon[34]);
+// game.catchPokemon(pokemon[35]);
+// game.catchPokemon(pokemon[36]);
+// game.catchPokemon(pokemon[37]);
+// game.catchPokemon(pokemon[38]);
+// console.log(game.party.length);
+// console.log(game.collection.length);
+// console.log(game.items[1].quantity);
+
+/*
+Exercise 20
+Copy the `catchPokemon` method that you just wrote above, and paste it below. 
+Modify is so that you can just pass in the name of a Pokemon instead of an entire object, and the method will look up the Pokemon from the data set for you.
+
+The string passed in should be allowed to be any case (for example, if the string 'PiKacHU' is passed to the function, it should match to 'Pikachu' in the data set). 
+
+If there is not a match, then return a string noting that the selected Pokemon does not exist. 
+Ensure you do not decrement the pokeball count if an invalid Pokemon name is passed in, 
+and also ensure that the Pokemon isn't added to the `game.party` or the `game.collection`.
+
+Solve Exercise 20 here:
+*/
+game.catchPokemon = function(pokemonName) {
+    const lowercaseName = pokemonName.toLowerCase();
+    let pokemonObj = null;
+    pokemon.forEach((p) => {
+        if(p.name.toLowerCase() === lowercaseName) {
+            pokemonObj = p;
+            return;
+        }
+    })
+    if(pokemonObj) {
+        if(game.items[1].quantity > 0) {
+            if(game.party.length <= 5) {
+                game.party.push(pokemonObj);
+            }
+            else {
+                game.collection.push(pokemonObj);
+            }
+            game.items[1].quantity--;
+        } else {
+            console.log("There are not enough pokeballs to catch the desired Pokemon.");
+        }
+    } else {
+        console.log("The selected Pokemon does not exist.");
+    }
+}
+
+game.catchPokemon('Paras');
+game.catchPokemon('Parasect');
+game.catchPokemon('Diglett');
+game.catchPokemon('Meowth');
+game.catchPokemon('Primeape');
+game.catchPokemon('Psyduck');
+game.catchPokemon('Mankey');
+console.log(game.party);
+console.log(game.collection);
 console.log(game.items[1].quantity);
